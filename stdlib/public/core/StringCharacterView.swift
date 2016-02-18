@@ -105,6 +105,17 @@ extension String.CharacterView : CollectionType {
           _utf16Index - predecessorLengthUTF16, _base._core))
     }
 
+    @warn_unused_result
+    public func distanceTo(end: Index) -> Index.Distance {
+        var p = self
+        var count: Distance = 0
+        while p != end {
+            count += 1
+            p._successorInPlace()
+        }
+        return count
+    }
+
     internal let _base: UnicodeScalarView.Index
 
     /// The length of this extended grapheme cluster in UTF-16 code units.

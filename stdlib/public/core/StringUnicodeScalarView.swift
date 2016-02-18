@@ -74,6 +74,11 @@ extension String {
       @warn_unused_result
       public func predecessor() -> Index {
         var i = _position-1
+
+        if i < 0 {
+            return Index(i, _core)
+        }
+
         let codeUnit = _core[i]
         if _slowPath((codeUnit >> 10) == 0b1101_11) {
           if i != 0 && (_core[i - 1] >> 10) == 0b1101_10 {
