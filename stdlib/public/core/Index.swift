@@ -316,6 +316,20 @@ extension BidirectionalIndexType {
     }
     return p
   }
+
+  @warn_unused_result
+  public func distanceTo(end: Self) -> Distance {
+    var p = self
+    var q = self
+    var count: Distance = 0
+    while p != end && q != end {
+        count += 1
+        p._successorInPlace()
+        q._predecessorInPlace()
+    }
+    return (p == end) ? count : count * (-1)
+  }
+
 }
 
 /// Replace `i` with its `predecessor()` and return the updated value
